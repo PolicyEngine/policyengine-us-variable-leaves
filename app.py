@@ -33,7 +33,7 @@ def run_policy_engine():
     result = subprocess.run(
         command, shell=True, capture_output=True, text=True
     )
-    return result.stdout if result.returncode == 0 else result.stderr
+    return result.stdout
 
 
 def extract_unique_leaf_nodes(output):
