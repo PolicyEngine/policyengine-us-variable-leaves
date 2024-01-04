@@ -11,8 +11,6 @@ EXCLUDE_VARS = {
     "spm_unit_size",
 }
 
-year_str = f"<{YEAR},"  # String to match the year in the output
-
 
 def create_yaml_file(variable_name):
     data = [
@@ -43,14 +41,10 @@ def extract_unique_leaf_nodes(output):
 
     for i in range(len(lines) - 1):
         line = lines[i]
-        if "=" not in line or f"<{YEAR}," not in line:
+        if "=" not in line or f"<{YEAR}" not in line:
             continue
 
-        variable = line.split("=")[0].strip()
-        # Remove the year and default tag
-        variable = (
-            variable.replace(year_str, "").replace("(default)>", "").strip()
-        )
+        variable = line.split("<")[0].strip()
 
         if variable in EXCLUDE_VARS:
             continue
